@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Rothleer String Converter",
+    "version": "1.0.0",
+    "description": "Rothleer String Converter: convert selection string into lucene/regular format.",
+    "permissions": [
+        "tabs",
+        "activeTab"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content_script.js"
+            ],
+            "run_at": "document_start"
+        }
+    ]
+}
