@@ -1,2 +1,2 @@
 # RothleerStringConverter
-Rothleer String Converter: convert selection string into lucene/regular format.
+Rothleer String Converter: convert selection string into different format.

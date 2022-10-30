@@ -7,7 +7,8 @@ async function getCurrentTab() {
 function transforStringToLuceneFormat(str) {
     res = '';
     const lucene_chars = '+-&|!(){}[]^"~*?:\\ /'
-    for (let c of str) {
+    for (let i in str) {
+        let c = str[i];
         if (lucene_chars.indexOf(c) != -1) {
             res += '\\';
         }
@@ -19,9 +20,33 @@ function transforStringToLuceneFormat(str) {
 function transforStringToRegularFormat(str) {
     res = '';
     const regular_chars = '*.?+$^[](){}|\/\\';
-    for (let c of str) {
+    for (let i in str) {
+        let c = str[i];
         if (regular_chars.indexOf(c) != -1) {
             res += '\\';
+        }
+        res += c;
+    }
+    return res;
+}
+
+function transforStringToAntiCensorShipFormat(str) {
+    res = '';
+    const spcical_char = '\u00A0';
+    for (let i in str) {
+        let c = str[i] + spcical_char;
+        res += c;
+    }
+    return res;
+}
+
+function transforStringToRecoverAntiCensorShipFormat(str) {
+    res = '';
+    const spcical_char = '\u00A0';
+    for (let i in str) {
+        let c = str[i];
+        if (c == spcical_char) {
+            continue;
         }
         res += c;
     }
@@ -34,6 +59,8 @@ async function popup() {
         console.log(res);
         document.getElementById('lucene').innerText = transforStringToLuceneFormat(res);
         document.getElementById('regular').innerText = transforStringToRegularFormat(res);
+        document.getElementById('anti-censorship').innerText = transforStringToAntiCensorShipFormat(res);
+        document.getElementById('recover-anti-censorship').innerText = transforStringToRecoverAntiCensorShipFormat(res);
     });
 }
 
